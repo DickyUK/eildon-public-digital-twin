@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "updated": "2026-10",
+  "basis": "Rounded historical aggregates; not live account data",
+  "metrics": [
+    {
+      "period": "2024",
+      "energy_kwh_rounded": 31500,
+      "cost_gbp_rounded": 3300,
+      "fuel": "combined gas and electricity"
+    },
+    {
+      "period": "2026 Jan-Aug",
+      "energy_kwh_rounded": 7400,
+      "cost_gbp_rounded": 1900,
+      "fuel": "electricity"
+    }
+  ],
+  "notes": "Periods and fuel types differ. No account identifiers, addresses or granular readings."
+}
