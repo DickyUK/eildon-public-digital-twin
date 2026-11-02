@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T11:45:41.597959+00:00",
+  "updated_at": "2026-11-02T11:55:00.017448+00:00",
   "source": "Octopus half-hourly grid imports",
   "months": [
     {
@@ -9,7 +9,12 @@
       "highest_24h_kwh": 124.8,
       "highest_30m_kwh": 3.86,
       "status": "verified",
-      "intervals": 1488
+      "intervals": 1488,
+      "energy_gbp": 500.68,
+      "standing_gbp": 16.27,
+      "total_gbp": 516.95,
+      "cost_status": "api_calculated",
+      "tariff": "Octopus Cosy"
     },
     {
       "month": "2026-02",
@@ -18,7 +23,12 @@
       "highest_24h_kwh": 67.2,
       "highest_30m_kwh": 2.71,
       "status": "verified",
-      "intervals": 1344
+      "intervals": 1344,
+      "energy_gbp": 298.46,
+      "standing_gbp": 14.7,
+      "total_gbp": 313.16,
+      "cost_status": "api_calculated",
+      "tariff": "Octopus Cosy"
     },
     {
       "month": "2026-03",
@@ -27,7 +37,12 @@
       "highest_24h_kwh": 48.7,
       "highest_30m_kwh": 3.11,
       "status": "verified",
-      "intervals": 1486
+      "intervals": 1486,
+      "energy_gbp": 255.36,
+      "standing_gbp": 16.27,
+      "total_gbp": 271.64,
+      "cost_status": "api_calculated",
+      "tariff": "Octopus Cosy"
     },
     {
       "month": "2026-04",
@@ -36,7 +51,12 @@
       "highest_24h_kwh": 40.4,
       "highest_30m_kwh": 2.2,
       "status": "verified",
-      "intervals": 1440
+      "intervals": 1440,
+      "energy_gbp": 169.0,
+      "standing_gbp": 16.39,
+      "total_gbp": 185.39,
+      "cost_status": "api_calculated",
+      "tariff": "Octopus Cosy"
     },
     {
       "month": "2026-05",
@@ -45,7 +65,12 @@
       "highest_24h_kwh": 34.7,
       "highest_30m_kwh": 2.25,
       "status": "verified",
-      "intervals": 1488
+      "intervals": 1488,
+      "energy_gbp": 140.3,
+      "standing_gbp": 16.93,
+      "total_gbp": 157.23,
+      "cost_status": "api_calculated",
+      "tariff": "Octopus Cosy"
     },
     {
       "month": "2026-06",
@@ -54,7 +79,12 @@
       "highest_24h_kwh": 26.5,
       "highest_30m_kwh": 2.25,
       "status": "verified",
-      "intervals": 1440
+      "intervals": 1440,
+      "energy_gbp": 119.35,
+      "standing_gbp": 16.39,
+      "total_gbp": 135.73,
+      "cost_status": "api_calculated",
+      "tariff": "Octopus Cosy"
     },
     {
       "month": "2026-07",
@@ -63,7 +93,12 @@
       "highest_24h_kwh": 19.9,
       "highest_30m_kwh": 2.15,
       "status": "verified",
-      "intervals": 1488
+      "intervals": 1488,
+      "energy_gbp": 91.28,
+      "standing_gbp": 16.93,
+      "total_gbp": 108.21,
+      "cost_status": "api_calculated",
+      "tariff": "Octopus Cosy"
     },
     {
       "month": "2026-08",
@@ -72,7 +107,12 @@
       "highest_24h_kwh": 30.8,
       "highest_30m_kwh": 2.09,
       "status": "verified",
-      "intervals": 1488
+      "intervals": 1488,
+      "energy_gbp": 112.46,
+      "standing_gbp": 16.93,
+      "total_gbp": 129.39,
+      "cost_status": "api_calculated",
+      "tariff": "Octopus Cosy"
     },
     {
       "month": "2026-09",
@@ -81,7 +121,12 @@
       "highest_24h_kwh": 55.3,
       "highest_30m_kwh": 3.83,
       "status": "verified",
-      "intervals": 1440
+      "intervals": 1440,
+      "energy_gbp": 131.66,
+      "standing_gbp": 16.39,
+      "total_gbp": 148.04,
+      "cost_status": "api_calculated",
+      "tariff": "Octopus Cosy"
     },
     {
       "month": "2026-10",
@@ -90,7 +135,12 @@
       "highest_24h_kwh": 82.0,
       "highest_30m_kwh": 5.74,
       "status": "verified",
-      "intervals": 1490
+      "intervals": 1490,
+      "energy_gbp": 266.41,
+      "standing_gbp": 17.15,
+      "total_gbp": 283.56,
+      "cost_status": "api_calculated",
+      "tariff": "Octopus Cosy"
     }
   ],
   "annual_peaks": {
