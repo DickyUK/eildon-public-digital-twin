@@ -41,7 +41,7 @@
 <p class="caveat">Snapshot through September 2026 for verified cost comparisons; purchased-energy detail currently shown for all eight months January–August 2026. No account data, address, API tokens or live meter requests are embedded.</p></section>
 <section class="card wide" id="system-sizing"><h2>Measured energy &amp; system sizing</h2>
 <p>Public, rounded historical indicators from the private Eildon model. <strong>Monthly history is provisional:</strong> the private repository has yearly snapshot CSVs, but automated publication of monthly history to this public site is not yet connected or verified.</p>
-<div class="tiles"><div class="tile"><small>Highest rolling 24-hour import · latest 35 days</small><strong><span id="peak-24h">Awaiting verified feed</span></strong><small>Energy in any complete rolling 24-hour period</small></div><div class="tile"><small>Highest 30-minute import · latest 35 days</small><strong><span id="peak-30m">Awaiting verified feed</span></strong><small>Energy consumed in half an hour</small></div><div class="tile"><small>Average demand during that highest half-hour</small><strong><span id="peak-power">Awaiting verified feed</span></strong><small>kW = half-hour kWh × 2; not instantaneous peak</small></div></div>
+<div class="tiles"><div class="tile"><small>Highest complete rolling 24-hour import · 2026 YTD</small><strong><span id="peak-24h">Awaiting verified feed</span></strong><small>Energy in any complete rolling 24-hour period</small></div><div class="tile"><small>Highest 30-minute import · 2026 YTD</small><strong><span id="peak-30m">Awaiting verified feed</span></strong><small>Energy consumed in half an hour</small></div><div class="tile"><small>Average demand during 2026 peak half-hour</small><strong><span id="peak-power">Awaiting verified feed</span></strong><small>kW = half-hour kWh × 2; not instantaneous peak</small></div></div>
 <details><summary>Monthly electricity imports and peaks · 2026</summary>
 <div class="comparison-scroll"><table class="comparison-table"><caption>Rounded to nearest 100 kWh from the private 2026 historical snapshot. These are provisional calendar-month estimates, not reconciled Octopus bills.</caption><thead><tr><th>Month</th><th>Total import</th><th>Daily average</th><th>Highest complete 24h</th><th>Highest 30 min</th><th>Data status</th></tr></thead><tbody id="verified-monthly-imports"><tr><td>January</td><td>~2,000 kWh</td><td>~64.5 kWh/day</td><td>—</td><td>—</td><td>Historical estimate</td></tr>
 <tr><td>February</td><td>~1,400 kWh</td><td>~50.0 kWh/day</td><td>—</td><td>—</td><td>Historical estimate</td></tr>
@@ -54,26 +54,24 @@
 <p class="caveat">2025 snapshot rows exist privately but are awaiting reconciliation with historical gas, electricity and billing records. The public site does not publish unverified 2025 calendar-month usage or spend.</p>
 </details>
 <details><summary>How to interpret peak demand and battery sizing</summary>
-<p class="small">The three peak figures above are populated automatically from a verified, anonymised private calculation covering the latest 35 days. The 30-minute average power is not an instantaneous maximum.</p>
+<p class="small">The three peak figures above are populated automatically from verified complete months of 2026, including rolling 24-hour windows across month boundaries. The 30-minute average power is not an instantaneous maximum.</p>
 <p class="small">Whole-home grid imports include heating, hot water, appliances and EV charging. They do not measure useful heat output or reveal gross demand supplied behind the meter by solar or a battery. Archived bill-period costs are not interchangeable with calendar-month spend.</p>
 </details></section>
 <script>
 (async()=>{
  const ids=["peak-24h","peak-30m","peak-power"];
  try{
-  const response=await fetch("/data/verified-peaks.json",{cache:"no-store"});
-  if(!response.ok)throw Error("not published");
-  const data=await response.json();
-  if(data.status!=="verified"||!data.rolling_24h||!data.half_hour||data.window_days!==35)throw Error("unverified");
-  const h=data.half_hour,d=data.rolling_24h;
-  if(![h.kwh,h.average_kw,d.kwh].every(Number.isFinite))throw Error("invalid");
-  document.getElementById(ids[0]).textContent=d.kwh.toFixed(1)+" kWh";
-  document.getElementById(ids[1]).textContent=h.kwh.toFixed(2)+" kWh";
-  document.getElementById(ids[2]).textContent=h.average_kw.toFixed(2)+" kW";
+  const response=await fetch("/data/verified-monthly-imports.json",{cache:"no-store"});
+  if(!response.ok)throw Error("Annual peak feed not published");
+  const data=await response.json(), p=data.annual_peaks;
+  if(!p||p.year!==2026||![p.highest_24h_kwh,p.highest_30m_kwh,p.highest_30m_average_kw].every(Number.isFinite))throw Error("Annual peaks not yet calculated");
+  document.getElementById(ids[0]).textContent=p.highest_24h_kwh.toFixed(1)+" kWh";
+  document.getElementById(ids[1]).textContent=p.highest_30m_kwh.toFixed(2)+" kWh";
+  document.getElementById(ids[2]).textContent=p.highest_30m_average_kw.toFixed(2)+" kW";
   const note=document.createElement("p");note.className="sizing-note";
-  note.textContent="Verified rolling 35-day import peaks; published "+new Date(data.updated_at).toLocaleDateString("en-GB")+". These are grid-import measurements, not instantaneous appliance peaks.";
+  note.textContent="Year-to-date peaks from complete verified 2026 calendar months through "+p.through_month+". Last published "+new Date(data.updated_at).toLocaleDateString("en-GB")+". Includes rolling 24-hour windows crossing month boundaries. Grid import is not instantaneous household demand.";
   document.getElementById("system-sizing").appendChild(note);
- }catch{for(const id of ids)document.getElementById(id).textContent="Awaiting verified feed";}
+ }catch{for(const id of ids)document.getElementById(id).textContent="Awaiting annual verification";}
 })();
 </script>
 <script>
