@@ -35,10 +35,10 @@
 <div class="tiles"><div class="tile savings-hero"><small>HISTORICAL PURCHASED ENERGY · JAN–AUG (APPROX.)</small><strong id="kwhSaving">~13,000 kWh</strong></div><div class="tile"><small>Model basis</small><strong>Scenario only</strong></div></div><p class="sizing-note">Earlier snapshot: approximately 20,380 kWh gas + electricity in reference bill periods versus 7,377 kWh electricity in Jan–Aug 2026, a difference of roughly 13,000 kWh (64%). This is NOT an annualised saving or a like-for-like efficiency measure: billing periods differ, the heating fuel changed, and early-2026 cylinder faults affected demand. The £ savings panel remains an illustrative scenario, not measured financial savings.</p><details><summary>How this demonstration is calculated</summary><p class="small">The demonstration uses a generic £2,850 annual reference and diminishing-return savings functions for PV, battery and combined operation. A thermal/wood contribution is modelled separately and a minimum £450 annual cost is imposed. This is an educational sensitivity model, not an investment forecast, engineering design or actual customer billing analysis. Electricity prices, export revenue, charging constraints, seasonal variation and installation costs are not modelled in sufficient detail for purchasing decisions.</p></details></section>
 <section class="card wide" id="historical-comparison"><h2>Historical purchased energy and bill comparison</h2>
 <p>Rounded, anonymised historical figures from the private model, presented as a fixed public snapshot. This is <strong>not a live feed</strong>. The reference combines earlier gas and electricity bills; 2026 uses electricity following heat-pump installation.</p>
-<div class="tiles"><div class="tile"><small>Comparable completed months</small><strong id="historic-count">9</strong></div><div class="tile"><small>Bill difference (rounded)</small><strong id="historic-savings">—</strong></div><div class="tile"><small>Bill reduction</small><strong id="historic-percent">—</strong></div></div>
-<details><summary>Expand month-by-month bill comparison</summary><div class="comparison-scroll"><table class="comparison-table"><caption>Costs rounded to nearest £10. Comparisons use historical bill periods, not identical calendar dates.</caption><thead><tr><th>Month</th><th>Earlier reference</th><th>2026</th><th>2026 vs reference</th><th>% difference</th></tr></thead><tbody id="historic-cost-rows"></tbody><tfoot id="historic-cost-total"></tfoot></table></div><p class="caveat">Differences are calculated from the underlying figures before display rounding, so displayed rows may not sum exactly. October is not included until its estimate can be confirmed as a complete-month figure.</p></details>
+<div class="tiles"><div class="tile"><small>Completed months of electricity data</small><strong id="historic-count">10</strong></div><div class="tile"><small>Bill difference (rounded)</small><strong id="historic-savings">—</strong></div><div class="tile"><small>Bill reduction</small><strong id="historic-percent">—</strong></div></div>
+<details><summary>Expand month-by-month bill comparison</summary><div class="comparison-scroll"><table class="comparison-table"><caption>Costs rounded to nearest £10. Comparisons use historical bill periods, not identical calendar dates.</caption><thead><tr><th>Month</th><th>Earlier reference</th><th>2026</th><th>2026 vs reference</th><th>% difference</th></tr></thead><tbody id="historic-cost-rows"></tbody><tfoot id="historic-cost-total"></tfoot></table></div><p class="caveat">Differences are calculated from the underlying figures before display rounding, so displayed rows may not sum exactly. The bill comparison currently covers January–September only; October 2026 cost has not been reconciled.</p></details>
 <details><summary>Expand month-by-month purchased energy comparison</summary><div class="comparison-scroll"><table class="comparison-table"><caption>kWh rounded to nearest 100. Purchased gas + electricity versus imported electricity.</caption><thead><tr><th>Month</th><th>Earlier reference</th><th>2026</th><th>Reduction</th><th>% difference</th></tr></thead><tbody id="historic-energy-rows"></tbody><tfoot id="historic-energy-total"></tfoot></table></div><p class="caveat">These figures represent purchased energy, not useful heat delivered. Heat-pump efficiency, billing-period mismatch, weather and changing EV demand mean this is not a like-for-like building-efficiency comparison.</p></details>
-<p class="caveat">Snapshot through September 2026 for verified cost comparisons; purchased-energy detail currently shown for all eight months January–August 2026. No account data, address, API tokens or live meter requests are embedded.</p></section>
+<p class="caveat">Purchased-energy comparison covers January–October 2026 using verified Octopus monthly imports. Bill comparison remains January–September because October cost has not been reconciled. No account data, address, API tokens or live meter requests are embedded.</p></section>
 <section class="card wide" id="system-sizing"><h2>Measured energy &amp; system sizing</h2>
 <p>Public, rounded historical indicators from the private Eildon model. <strong>Monthly history is provisional:</strong> the private repository has yearly snapshot CSVs, but automated publication of monthly history to this public site is not yet connected or verified.</p>
 <div class="tiles"><div class="tile"><small>Highest complete rolling 24-hour import · 2026 YTD</small><strong><span id="peak-24h">Awaiting verified feed</span></strong><small>Energy in any complete rolling 24-hour period</small></div><div class="tile"><small>Highest 30-minute import · 2026 YTD</small><strong><span id="peak-30m">Awaiting verified feed</span></strong><small>Energy consumed in half an hour</small></div><div class="tile"><small>Average demand during 2026 peak half-hour</small><strong><span id="peak-power">Awaiting verified feed</span></strong><small>kW = half-hour kWh × 2; not instantaneous peak</small></div></div>
@@ -119,12 +119,12 @@ inputs.forEach(id=>$(id).addEventListener('input',update));update();
 
 // Privacy-safe historical snapshot: static values, not fetched from the private twin.
 (function(){
- const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'];
+ const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct'];
  const oldCost=[427.67,417.67,361.70,299.13,217.32,199.24,158.34,148.98,178.36];
  const newCost=[522.75,359.89,245.09,206.22,160.37,141.49,108.94,126.98,148.86];
- const oldEnergy=[5595.7,4013.8,3377.5,2946.2,1674.7,1123,828,821.4];
+ const oldEnergy=[5595.7,4013.8,3377.5,2946.2,1674.7,1123,828,821.4,1113.5,2065.2];
  // Only verified public-safe monthly values are displayed; do not invent missing imports.
- const newEnergy=[2003.6,1398.2,956.9,864.0,673.3,576.6,420.9,483.7];
+ const newEnergy=[2003.6,1398.2,956.9,864.0,673.3,576.6,420.9,483.7,null,null];
  const pounds=x=>'£'+(Math.round(Math.abs(x)/10)*10).toLocaleString('en-GB');
  const kwh=x=>(Math.round(Math.abs(x)/100)*100).toLocaleString('en-GB')+' kWh';
  const costBody=document.getElementById('historic-cost-rows'),energyBody=document.getElementById('historic-energy-rows');
@@ -132,14 +132,41 @@ inputs.forEach(id=>$(id).addEventListener('input',update));update();
  const percentChange=(old,now)=>Math.abs(100*(old-now)/old).toFixed(1)+'% '+(now<=old?'less':'more');
  const row=(cells,negative=false)=>'<tr>'+cells.map((c,i)=>'<td'+(i>=3?' class="'+(negative?'negative':'positive')+'"':'')+'>'+c+'</td>').join('')+'</tr>';
  let totalOld=0,totalNew=0;
- names.forEach((name,i)=>{const diff=oldCost[i]-newCost[i];totalOld+=oldCost[i];totalNew+=newCost[i];costBody.insertAdjacentHTML('beforeend',row([name,pounds(oldCost[i]),pounds(newCost[i]),costChange(diff),percentChange(oldCost[i],newCost[i])],diff<0));});
+ names.slice(0,oldCost.length).forEach((name,i)=>{const diff=oldCost[i]-newCost[i];totalOld+=oldCost[i];totalNew+=newCost[i];costBody.insertAdjacentHTML('beforeend',row([name,pounds(oldCost[i]),pounds(newCost[i]),costChange(diff),percentChange(oldCost[i],newCost[i])],diff<0));});
  const saved=totalOld-totalNew;
- document.getElementById('historic-count').textContent=names.length;
+ document.getElementById('historic-count').textContent='10';
  document.getElementById('historic-savings').textContent=costChange(saved);
  document.getElementById('historic-percent').textContent=(100*saved/totalOld).toFixed(1)+'%';
  document.getElementById('historic-cost-total').innerHTML=row(['Jan–Sep',pounds(totalOld),pounds(totalNew),costChange(saved),percentChange(totalOld,totalNew)],saved<0);
  let eOld=0,eNew=0,count=0;
  oldEnergy.forEach((old,i)=>{const now=newEnergy[i];if(now===null){energyBody.insertAdjacentHTML('beforeend',row([names[i],kwh(old),'Not published','—','—']));return;}count++;eOld+=old;eNew+=now;energyBody.insertAdjacentHTML('beforeend',row([names[i],kwh(old),kwh(now),kwh(old-now),percentChange(old,now)],old<now));});
- document.getElementById('historic-energy-total').innerHTML=row(['Jan–Aug ('+count+' months)',kwh(eOld),kwh(eNew),kwh(eOld-eNew),percentChange(eOld,eNew)],eOld<eNew);
+ document.getElementById('historic-energy-total').innerHTML=row(['Jan–Oct ('+count+' months)',kwh(eOld),kwh(eNew),kwh(eOld-eNew),percentChange(eOld,eNew)],eOld<eNew);
 })();
-</script></body></html>
+</script>
+<script>
+(async()=>{
+ const body=document.getElementById('historic-energy-rows');
+ const foot=document.getElementById('historic-energy-total');
+ try{
+  const r=await fetch('/data/verified-monthly-imports.json',{cache:'no-store'});
+  if(!r.ok)throw Error('Monthly feed unavailable');
+  const d=await r.json();
+  const lookup=new Map((d.months||[]).filter(x=>x.status==='verified'&&Number.isFinite(x.kwh_rounded_100)).map(x=>[x.month,x.kwh_rounded_100]));
+  const earlier=[5595.7,4013.8,3377.5,2946.2,1674.7,1123,828,821.4,1113.5,2065.2];
+  const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct'];
+  const kwh=x=>(Math.round(Math.abs(x)/100)*100).toLocaleString('en-GB')+' kWh';
+  const rows=[];let oldTotal=0,newTotal=0,n=0;
+  for(let i=0;i<10;i++){
+   const now=lookup.get('2026-'+String(i+1).padStart(2,'0')),old=earlier[i];
+   if(now===undefined){rows.push([names[i],kwh(old),'Awaiting verified import','—','—']);continue;}
+   n++;oldTotal+=old;newTotal+=now;
+   const pct=Math.abs((old-now)*100/old).toFixed(1)+'% '+(now<=old?'less':'more');
+   rows.push([names[i],kwh(old),kwh(now),kwh(old-now),pct]);
+  }
+  const render=cells=>{const tr=document.createElement('tr');cells.forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.appendChild(td)});return tr};
+  body.replaceChildren(...rows.map(render));
+  foot.replaceChildren(render(['Jan–Oct ('+n+' verified months)',kwh(oldTotal),kwh(newTotal),kwh(oldTotal-newTotal),oldTotal?Math.abs((oldTotal-newTotal)*100/oldTotal).toFixed(1)+'% '+(newTotal<=oldTotal?'less':'more'):'—']));
+  document.getElementById('historic-count').textContent=String(n);
+ }catch(e){document.getElementById('historic-count').textContent='Awaiting feed';}
+})();
+</body></html>
