@@ -50,7 +50,7 @@
 <div class="tile"><small>Highest 30-minute average import power</small><strong><span id="peak-power">Awaiting verified feed</span></strong><small>Half-hour kWh × 2 = average kW</small></div>
 </div>
 <details><summary>Historical monthly electricity imports · 2026 snapshot</summary>
-<div class="comparison-scroll"><table class="comparison-table"><caption>Rounded to nearest 100 kWh from the private 2026 historical snapshot. These are provisional calendar-month estimates, not reconciled Octopus bills.</caption><thead><tr><th>Month</th><th>Electricity import</th><th>Data status</th></tr></thead><tbody>
+<div class="comparison-scroll"><table class="comparison-table"><caption>Rounded to nearest 100 kWh from the private 2026 historical snapshot. These are provisional calendar-month estimates, not reconciled Octopus bills.</caption><thead><tr><th>Month</th><th>Electricity import</th><th>Data status</th></tr></thead><tbody id="verified-monthly-imports">
 <tr><td>January</td><td>~2,000 kWh</td><td>Historical estimate</td></tr>
 <tr><td>February</td><td>~1,400 kWh</td><td>Historical estimate</td></tr>
 <tr><td>March</td><td>~1,000 kWh</td><td>Historical estimate</td></tr>
@@ -83,6 +83,37 @@
   note.textContent="Verified rolling 35-day import peaks; published "+new Date(data.updated_at).toLocaleDateString("en-GB")+". These are grid-import measurements, not instantaneous appliance peaks.";
   document.getElementById("system-sizing").appendChild(note);
  }catch{for(const id of ids)document.getElementById(id).textContent="Awaiting verified feed";}
+})();
+</script>
+<script>
+(async function(){
+  const tbody=document.getElementById("verified-monthly-imports");
+  if(!tbody)return;
+  try{
+    const response=await fetch("/data/verified-monthly-imports.json",{cache:"no-store"});
+    if(!response.ok)return;
+    const data=await response.json();
+    if(!Array.isArray(data.months))return;
+    const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const verified=new Map(data.months.filter(x=>/^2026-(0[1-9]|1[0-2])$/.test(x.month)&&x.status==="verified"&&Number.isFinite(x.kwh_rounded_100)&&x.kwh_rounded_100>=0).map(x=>[x.month,x]));
+    if(!verified.size)return;
+    const rows=[];
+    for(let m=1;m<=12;m++){
+      const id="2026-"+String(m).padStart(2,"0");
+      const v=verified.get(id);
+      if(v){
+        rows.push([monthNames[m-1],"~"+v.kwh_rounded_100.toLocaleString("en-GB")+" kWh","Verified complete month"]);
+      }else if(m<=8){
+        const old=[2000,1400,1000,900,700,600,400,500][m-1];
+        rows.push([monthNames[m-1],"~"+old.toLocaleString("en-GB")+" kWh","Historical estimate"]);
+      }
+    }
+    tbody.replaceChildren(...rows.map(cells=>{
+      const tr=document.createElement("tr");
+      cells.forEach(value=>{const td=document.createElement("td");td.textContent=value;tr.appendChild(td)});
+      return tr;
+    }));
+  }catch(error){console.warn("Monthly import feed unavailable; retaining historical snapshot",error);}
 })();
 </script>
 <section class="card wide"><h2>About the example home</h2><p>An anonymised, upgraded UK detached home with an air-source heat pump, underfloor heating, mechanical ventilation with heat recovery and mixed levels of fabric improvement. The building description is intentionally broad: no street address, EPC certificate reference, household identities, room-by-room vulnerabilities, account numbers, meter details or live usage history are included.</p><p class="small">This public demonstrator is static and makes no requests to private energy-account services. The private Eildon model remains separate. Figures and animated flows are illustrative, not live readings.</p></section></div><footer class="small">Eildon Public Demonstrator · Privacy-first static scenario model · No account login, cookies, analytics or private energy APIs included in this page.</footer></main>
