@@ -40,7 +40,7 @@
 <details><summary>Expand month-by-month purchased energy comparison</summary><div class="comparison-scroll"><table class="comparison-table"><caption>kWh rounded to nearest 100. Purchased gas + electricity versus imported electricity.</caption><thead><tr><th>Month</th><th>Earlier reference</th><th>2026</th><th>Reduction</th><th>% difference</th></tr></thead><tbody id="historic-energy-rows"></tbody><tfoot id="historic-energy-total"></tfoot></table></div><p class="caveat">These figures represent purchased energy, not useful heat delivered. Heat-pump efficiency, billing-period mismatch, weather and changing EV demand mean this is not a like-for-like building-efficiency comparison.</p></details>
 <p class="caveat">Snapshot through September 2026 for verified cost comparisons; purchased-energy detail currently shown for all eight months January–August 2026. No account data, address, API tokens or live meter requests are embedded.</p></section>
 <section class="card wide" id="system-sizing"><h2>Measured energy &amp; system sizing</h2>
-<p>Public, rounded historical indicators from the private Eildon model. <strong>Not live:</strong> the private repository now has yearly snapshot CSVs and a monthly archival workflow, but automatic publication to this public site is not yet connected or verified.</p>
+<p>Public, rounded historical indicators from the private Eildon model. <strong>Monthly history is provisional:</strong> the private repository has yearly snapshot CSVs, but automated publication of monthly history to this public site is not yet connected or verified.</p>
 <div class="tiles">
 <div class="tile"><small>Highest monthly electricity import · Jan–Aug 2026</small><strong>~2,000 kWh</strong><small>January · rounded to 100 kWh</small></div>
 <div class="tile"><small>January daily average</small><strong>~65 kWh/day</strong><small>Monthly average, not a peak day</small></div>
@@ -50,20 +50,20 @@
 <div class="tile"><small>Highest 30-minute average import power</small><strong><span id="peak-power">Awaiting verified feed</span></strong><small>Half-hour kWh × 2 = average kW</small></div>
 </div>
 <details><summary>Historical monthly electricity imports · 2026 snapshot</summary>
-<div class="comparison-scroll"><table class="comparison-table"><caption>Public values rounded to nearest 100 kWh; from private historical snapshot and dashboard. Not an Octopus bill.</caption><thead><tr><th>Month</th><th>Electricity import</th><th>Data status</th></tr></thead><tbody>
-<tr><td>January</td><td>~2,000 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
-<tr><td>February</td><td>~1,400 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
-<tr><td>March</td><td>~1,000 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
-<tr><td>April</td><td>~900 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
-<tr><td>May</td><td>~700 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
-<tr><td>June</td><td>~600 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
-<tr><td>July</td><td>~400 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
-<tr><td>August</td><td>~500 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
+<div class="comparison-scroll"><table class="comparison-table"><caption>Rounded to nearest 100 kWh from the private 2026 historical snapshot. These are provisional calendar-month estimates, not reconciled Octopus bills.</caption><thead><tr><th>Month</th><th>Electricity import</th><th>Data status</th></tr></thead><tbody>
+<tr><td>January</td><td>~2,000 kWh</td><td>Historical estimate</td></tr>
+<tr><td>February</td><td>~1,400 kWh</td><td>Historical estimate</td></tr>
+<tr><td>March</td><td>~1,000 kWh</td><td>Historical estimate</td></tr>
+<tr><td>April</td><td>~900 kWh</td><td>Historical estimate</td></tr>
+<tr><td>May</td><td>~700 kWh</td><td>Historical estimate</td></tr>
+<tr><td>June</td><td>~600 kWh</td><td>Historical estimate</td></tr>
+<tr><td>July</td><td>~400 kWh</td><td>Historical estimate</td></tr>
+<tr><td>August</td><td>~500 kWh</td><td>Historical estimate</td></tr>
 </tbody></table></div>
 <p class="caveat">2025 snapshot rows exist privately but are awaiting reconciliation with historical gas, electricity and billing records. The public site does not publish unverified 2025 calendar-month usage or spend.</p>
 </details>
 <details><summary>How to interpret peak demand and battery sizing</summary>
-<p class="small">The private API now computes the largest complete contiguous 24-hour grid import and the largest 30-minute import from half-hourly Octopus readings. The public peak fields will remain pending until the API results are verified and an anonymised export is connected. A 30-minute average is not an instantaneous maximum.</p>
+<p class="small">The three peak figures above are populated automatically from a verified, anonymised private calculation covering the latest 35 days. The 30-minute average power is not an instantaneous maximum.</p>
 <p class="small">Whole-home grid imports include heating, hot water, appliances and EV charging. They do not measure useful heat output or reveal gross demand supplied behind the meter by solar or a battery. Archived bill-period costs are not interchangeable with calendar-month spend.</p>
 </details></section>
 <script>
