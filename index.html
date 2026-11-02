@@ -45,9 +45,9 @@
 <div class="tile"><small>Highest monthly electricity import · Jan–Aug 2026</small><strong>~2,000 kWh</strong><small>January · rounded to 100 kWh</small></div>
 <div class="tile"><small>January daily average</small><strong>~65 kWh/day</strong><small>Monthly average, not a peak day</small></div>
 <div class="tile"><small>January average grid import power</small><strong>~2.7 kW</strong><small>Monthly average, not an inverter peak</small></div>
-<div class="tile"><small>Highest complete rolling 24-hour import</small><strong>Pending verification</strong><small>Private API calculates this over 35 days</small></div>
-<div class="tile"><small>Highest 30-minute import</small><strong>Pending verification</strong><small>Measured kWh per half-hour</small></div>
-<div class="tile"><small>Highest 30-minute average import power</small><strong>Pending verification</strong><small>Half-hour kWh × 2 = average kW</small></div>
+<div class="tile"><small>Highest complete rolling 24-hour import</small><strong><span id="peak-24h">Awaiting verified feed</span></strong><small>Private API calculates this over 35 days</small></div>
+<div class="tile"><small>Highest 30-minute import</small><strong><span id="peak-30m">Awaiting verified feed</span></strong><small>Measured kWh per half-hour</small></div>
+<div class="tile"><small>Highest 30-minute average import power</small><strong><span id="peak-power">Awaiting verified feed</span></strong><small>Half-hour kWh × 2 = average kW</small></div>
 </div>
 <details><summary>Historical monthly electricity imports · 2026 snapshot</summary>
 <div class="comparison-scroll"><table class="comparison-table"><caption>Public values rounded to nearest 100 kWh; from private historical snapshot and dashboard. Not an Octopus bill.</caption><thead><tr><th>Month</th><th>Electricity import</th><th>Data status</th></tr></thead><tbody>
@@ -66,6 +66,25 @@
 <p class="small">The private API now computes the largest complete contiguous 24-hour grid import and the largest 30-minute import from half-hourly Octopus readings. The public peak fields will remain pending until the API results are verified and an anonymised export is connected. A 30-minute average is not an instantaneous maximum.</p>
 <p class="small">Whole-home grid imports include heating, hot water, appliances and EV charging. They do not measure useful heat output or reveal gross demand supplied behind the meter by solar or a battery. Archived bill-period costs are not interchangeable with calendar-month spend.</p>
 </details></section>
+<script>
+(async()=>{
+ const ids=["peak-24h","peak-30m","peak-power"];
+ try{
+  const response=await fetch("/data/verified-peaks.json",{cache:"no-store"});
+  if(!response.ok)throw Error("not published");
+  const data=await response.json();
+  if(data.status!=="verified"||!data.rolling_24h||!data.half_hour||data.window_days!==35)throw Error("unverified");
+  const h=data.half_hour,d=data.rolling_24h;
+  if(![h.kwh,h.average_kw,d.kwh].every(Number.isFinite))throw Error("invalid");
+  document.getElementById(ids[0]).textContent=d.kwh.toFixed(1)+" kWh";
+  document.getElementById(ids[1]).textContent=h.kwh.toFixed(2)+" kWh";
+  document.getElementById(ids[2]).textContent=h.average_kw.toFixed(2)+" kW";
+  const note=document.createElement("p");note.className="sizing-note";
+  note.textContent="Verified rolling 35-day import peaks; published "+new Date(data.updated_at).toLocaleDateString("en-GB")+". These are grid-import measurements, not instantaneous appliance peaks.";
+  document.getElementById("system-sizing").appendChild(note);
+ }catch{for(const id of ids)document.getElementById(id).textContent="Awaiting verified feed";}
+})();
+</script>
 <section class="card wide"><h2>About the example home</h2><p>An anonymised, upgraded UK detached home with an air-source heat pump, underfloor heating, mechanical ventilation with heat recovery and mixed levels of fabric improvement. The building description is intentionally broad: no street address, EPC certificate reference, household identities, room-by-room vulnerabilities, account numbers, meter details or live usage history are included.</p><p class="small">This public demonstrator is static and makes no requests to private energy-account services. The private Eildon model remains separate. Figures and animated flows are illustrative, not live readings.</p></section></div><footer class="small">Eildon Public Demonstrator · Privacy-first static scenario model · No account login, cookies, analytics or private energy APIs included in this page.</footer></main>
 <script>
 'use strict';const $=id=>document.getElementById(id);const inputs=['pv','bat','tank','wood'];const NS='http://www.w3.org/2000/svg';function rect(parent,props){const el=document.createElementNS(NS,'rect');for(const [k,v] of Object.entries(props))el.setAttribute(k,v);parent.appendChild(el)}
