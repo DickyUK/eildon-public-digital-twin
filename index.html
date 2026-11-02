@@ -40,20 +40,31 @@
 <details><summary>Expand month-by-month purchased energy comparison</summary><div class="comparison-scroll"><table class="comparison-table"><caption>kWh rounded to nearest 100. Purchased gas + electricity versus imported electricity.</caption><thead><tr><th>Month</th><th>Earlier reference</th><th>2026</th><th>Reduction</th><th>% difference</th></tr></thead><tbody id="historic-energy-rows"></tbody><tfoot id="historic-energy-total"></tfoot></table></div><p class="caveat">These figures represent purchased energy, not useful heat delivered. Heat-pump efficiency, billing-period mismatch, weather and changing EV demand mean this is not a like-for-like building-efficiency comparison.</p></details>
 <p class="caveat">Snapshot through September 2026 for verified cost comparisons; purchased-energy detail currently shown for all eight months January–August 2026. No account data, address, API tokens or live meter requests are embedded.</p></section>
 <section class="card wide" id="system-sizing"><h2>Measured energy &amp; system sizing</h2>
-<p>Useful engineering indicators, separating <strong>measured electricity imports</strong> from <strong>heat-pump thermal output</strong>. This public page is a static anonymised snapshot, not a connection to the private Octopus account.</p>
+<p>Public, rounded historical indicators from the private Eildon model. <strong>Not live:</strong> the private repository now has yearly snapshot CSVs and a monthly archival workflow, but automatic publication to this public site is not yet connected or verified.</p>
 <div class="tiles">
-<div class="tile"><small>January 2026 electricity import</small><strong>~2,000 kWh</strong></div>
-<div class="tile"><small>Average January electrical import per day</small><strong>~65 kWh/day</strong></div>
-<div class="tile"><small>January average imported electrical power</small><strong>~2.7 kW</strong></div>
-<div class="tile"><small>Highest 24-hour electrical import</small><strong>Awaiting interval analysis</strong></div>
-<div class="tile"><small>Highest 30-minute electrical import</small><strong>Awaiting interval analysis</strong></div>
-<div class="tile"><small>Highest 30-minute average electrical power</small><strong>Awaiting interval analysis</strong></div>
+<div class="tile"><small>Highest monthly electricity import · Jan–Aug 2026</small><strong>~2,000 kWh</strong><small>January · rounded to 100 kWh</small></div>
+<div class="tile"><small>January daily average</small><strong>~65 kWh/day</strong><small>Monthly average, not a peak day</small></div>
+<div class="tile"><small>January average grid import power</small><strong>~2.7 kW</strong><small>Monthly average, not an inverter peak</small></div>
+<div class="tile"><small>Highest complete rolling 24-hour import</small><strong>Pending verification</strong><small>Private API calculates this over 35 days</small></div>
+<div class="tile"><small>Highest 30-minute import</small><strong>Pending verification</strong><small>Measured kWh per half-hour</small></div>
+<div class="tile"><small>Highest 30-minute average import power</small><strong>Pending verification</strong><small>Half-hour kWh × 2 = average kW</small></div>
 </div>
-<p class="sizing-note">January's average is derived from approximately 2,004 kWh over 31 days; it is <strong>not a peak</strong>. To calculate genuine peaks, the private model must aggregate actual 30-minute import intervals into complete 24-hour windows and identify the largest individual half-hour reading. Half-hour average electrical power (kW) = interval import (kWh) × 2. Incomplete or missing intervals must be excluded, not treated as zero.</p>
-<details><summary>What the data can tell us about battery and heat-pump sizing</summary>
-<p class="small"><strong>Battery and inverter:</strong> half-hourly grid imports help quantify peak average imported power and daily energy needs, but do not reveal gross household demand when a battery or solar PV is already supplying power. Instantaneous peaks may exceed a 30-minute average.</p>
-<p class="small"><strong>Heat pump:</strong> electricity-import peaks cannot be converted directly into peak delivered thermal demand without heat-pump electrical input, heat output/COP and other household loads. The heat pump's design heat loss and flow-temperature requirements should be assessed separately.</p>
-<p class="small"><strong>Public reporting:</strong> publish rounded peak values and the measurement period only after a private-side calculation has verified complete intervals. Do not expose timestamps of household activity, meter identifiers, API credentials or individual half-hour records.</p>
+<details><summary>Historical monthly electricity imports · 2026 snapshot</summary>
+<div class="comparison-scroll"><table class="comparison-table"><caption>Public values rounded to nearest 100 kWh; from private historical snapshot and dashboard. Not an Octopus bill.</caption><thead><tr><th>Month</th><th>Electricity import</th><th>Data status</th></tr></thead><tbody>
+<tr><td>January</td><td>~2,000 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
+<tr><td>February</td><td>~1,400 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
+<tr><td>March</td><td>~1,000 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
+<tr><td>April</td><td>~900 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
+<tr><td>May</td><td>~700 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
+<tr><td>June</td><td>~600 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
+<tr><td>July</td><td>~400 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
+<tr><td>August</td><td>~500 kWh</td><td>Historical snapshot; pending interval verification</td></tr>
+</tbody></table></div>
+<p class="caveat">2025 snapshot rows exist privately but are awaiting reconciliation with historical gas, electricity and billing records. The public site does not publish unverified 2025 calendar-month usage or spend.</p>
+</details>
+<details><summary>How to interpret peak demand and battery sizing</summary>
+<p class="small">The private API now computes the largest complete contiguous 24-hour grid import and the largest 30-minute import from half-hourly Octopus readings. The public peak fields will remain pending until the API results are verified and an anonymised export is connected. A 30-minute average is not an instantaneous maximum.</p>
+<p class="small">Whole-home grid imports include heating, hot water, appliances and EV charging. They do not measure useful heat output or reveal gross demand supplied behind the meter by solar or a battery. Archived bill-period costs are not interchangeable with calendar-month spend.</p>
 </details></section>
 <section class="card wide"><h2>About the example home</h2><p>An anonymised, upgraded UK detached home with an air-source heat pump, underfloor heating, mechanical ventilation with heat recovery and mixed levels of fabric improvement. The building description is intentionally broad: no street address, EPC certificate reference, household identities, room-by-room vulnerabilities, account numbers, meter details or live usage history are included.</p><p class="small">This public demonstrator is static and makes no requests to private energy-account services. The private Eildon model remains separate. Figures and animated flows are illustrative, not live readings.</p></section></div><footer class="small">Eildon Public Demonstrator · Privacy-first static scenario model · No account login, cookies, analytics or private energy APIs included in this page.</footer></main>
 <script>
