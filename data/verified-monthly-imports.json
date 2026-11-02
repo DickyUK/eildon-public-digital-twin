@@ -1,0 +1,96 @@
+{
+  "updated_at": "2026-11-02T11:41:15.783153+00:00",
+  "source": "Octopus half-hourly grid imports",
+  "months": [
+    {
+      "month": "2026-01",
+      "kwh_rounded_100": 2000,
+      "daily_average_kwh": 63.7,
+      "highest_24h_kwh": 124.8,
+      "highest_30m_kwh": 3.86,
+      "status": "verified",
+      "intervals": 1488
+    },
+    {
+      "month": "2026-02",
+      "kwh_rounded_100": 1200,
+      "daily_average_kwh": 43.7,
+      "highest_24h_kwh": 67.2,
+      "highest_30m_kwh": 2.71,
+      "status": "verified",
+      "intervals": 1344
+    },
+    {
+      "month": "2026-03",
+      "kwh_rounded_100": 1100,
+      "daily_average_kwh": 34.2,
+      "highest_24h_kwh": 48.7,
+      "highest_30m_kwh": 3.11,
+      "status": "verified",
+      "intervals": 1486
+    },
+    {
+      "month": "2026-04",
+      "kwh_rounded_100": 800,
+      "daily_average_kwh": 26.4,
+      "highest_24h_kwh": 40.4,
+      "highest_30m_kwh": 2.2,
+      "status": "verified",
+      "intervals": 1440
+    },
+    {
+      "month": "2026-05",
+      "kwh_rounded_100": 700,
+      "daily_average_kwh": 21.3,
+      "highest_24h_kwh": 34.7,
+      "highest_30m_kwh": 2.25,
+      "status": "verified",
+      "intervals": 1488
+    },
+    {
+      "month": "2026-06",
+      "kwh_rounded_100": 600,
+      "daily_average_kwh": 18.4,
+      "highest_24h_kwh": 26.5,
+      "highest_30m_kwh": 2.25,
+      "status": "verified",
+      "intervals": 1440
+    },
+    {
+      "month": "2026-07",
+      "kwh_rounded_100": 400,
+      "daily_average_kwh": 13.5,
+      "highest_24h_kwh": 19.9,
+      "highest_30m_kwh": 2.15,
+      "status": "verified",
+      "intervals": 1488
+    },
+    {
+      "month": "2026-08",
+      "kwh_rounded_100": 500,
+      "daily_average_kwh": 16.1,
+      "highest_24h_kwh": 30.8,
+      "highest_30m_kwh": 2.09,
+      "status": "verified",
+      "intervals": 1488
+    },
+    {
+      "month": "2026-09",
+      "kwh_rounded_100": 600,
+      "daily_average_kwh": 21.4,
+      "highest_24h_kwh": 55.3,
+      "highest_30m_kwh": 3.83,
+      "status": "verified",
+      "intervals": 1440
+    },
+    {
+      "month": "2026-10",
+      "kwh_rounded_100": 1300,
+      "daily_average_kwh": 41.3,
+      "highest_24h_kwh": 82.0,
+      "highest_30m_kwh": 5.74,
+      "status": "verified",
+      "intervals": 1490
+    }
+  ]
+}
