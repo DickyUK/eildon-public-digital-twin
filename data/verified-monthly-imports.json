@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T11:41:15.783153+00:00",
+  "updated_at": "2026-11-02T11:45:41.597959+00:00",
   "source": "Octopus half-hourly grid imports",
   "months": [
     {
@@ -92,5 +92,12 @@
       "status": "verified",
       "intervals": 1490
     }
-  ]
+  ],
+  "annual_peaks": {
+    "year": 2026,
+    "through_month": "2026-10",
+    "highest_24h_kwh": 124.8,
+    "highest_30m_kwh": 5.74,
+    "highest_30m_average_kw": 11.47
+  }
 }
