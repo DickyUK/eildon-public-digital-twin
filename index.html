@@ -120,8 +120,8 @@ inputs.forEach(id=>$(id).addEventListener('input',update));update();
 // Privacy-safe historical snapshot: static values, not fetched from the private twin.
 (function(){
  const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct'];
- const oldCost=[427.67,417.67,361.70,299.13,217.32,199.24,158.34,148.98,178.36];
- const newCost=[522.75,359.89,245.09,206.22,160.37,141.49,108.94,126.98,148.86];
+ const oldCost=[427.67,417.67,361.70,299.13,217.32,199.24,158.34,148.98,178.36,207.63];
+ const newCost=[522.75,359.89,245.09,206.22,160.37,141.49,108.94,126.98,148.86,228.64];
  const oldEnergy=[5595.7,4013.8,3377.5,2946.2,1674.7,1123,828,821.4,1113.5,2065.2];
  // Only verified public-safe monthly values are displayed; do not invent missing imports.
  const newEnergy=[2003.6,1398.2,956.9,864.0,673.3,576.6,420.9,483.7,null,null];
@@ -137,7 +137,7 @@ inputs.forEach(id=>$(id).addEventListener('input',update));update();
  document.getElementById('historic-count').textContent='10';
  document.getElementById('historic-savings').textContent=costChange(saved);
  document.getElementById('historic-percent').textContent=(100*saved/totalOld).toFixed(1)+'%';
- document.getElementById('historic-cost-total').innerHTML=row(['Jan–Sep',pounds(totalOld),pounds(totalNew),costChange(saved),percentChange(totalOld,totalNew)],saved<0);
+ document.getElementById('historic-cost-total').innerHTML=row(['Jan–Oct',pounds(totalOld),pounds(totalNew),costChange(saved),percentChange(totalOld,totalNew)],saved<0);
  let eOld=0,eNew=0,count=0;
  oldEnergy.forEach((old,i)=>{const now=newEnergy[i];if(now===null){energyBody.insertAdjacentHTML('beforeend',row([names[i],kwh(old),'Not published','—','—']));return;}count++;eOld+=old;eNew+=now;energyBody.insertAdjacentHTML('beforeend',row([names[i],kwh(old),kwh(now),kwh(old-now),percentChange(old,now)],old<now));});
  document.getElementById('historic-energy-total').innerHTML=row(['Jan–Oct ('+count+' months)',kwh(eOld),kwh(eNew),kwh(eOld-eNew),percentChange(eOld,eNew)],eOld<eNew);
