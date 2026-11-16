@@ -1,9 +1,9 @@
 {
   "status": "verified",
   "window_days": 35,
-  "updated_at": "2026-11-15T16:24:01.096151+00:00",
+  "updated_at": "2026-11-16T19:38:54.495309+00:00",
   "rolling_24h": {
-    "kwh": 95.3
+    "kwh": 100.6
   },
   "half_hour": {
     "kwh": 5.74,
