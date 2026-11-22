@@ -1,13 +1,13 @@
 {
   "status": "verified",
   "window_days": 35,
-  "updated_at": "2026-11-21T16:48:26.235135+00:00",
+  "updated_at": "2026-11-22T17:11:31.801173+00:00",
   "rolling_24h": {
     "kwh": 100.6
   },
   "half_hour": {
-    "kwh": 5.74,
-    "average_kw": 11.47
+    "kwh": 4.25,
+    "average_kw": 8.5
   },
   "source": "Rounded aggregate of Octopus grid imports"
 }
